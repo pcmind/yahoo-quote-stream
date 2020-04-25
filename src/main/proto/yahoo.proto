@@ -1,0 +1,40 @@
+syntax = "proto2";
+option java_package = "io.org.yahoo.proto";
+
+//
+message StreamerData {
+    optional string id = 1;
+    optional float price = 2;
+    //time in milliseconds of specific time zone
+    optional sint64 time = 3;
+    optional string currency = 4;
+    optional string exchange = 5;
+    required int32 quoteType = 6;
+    required int32 marketHours = 7;
+    optional float changePercent = 8;
+    optional sint64 dayVolume = 9;
+    optional float dayHigh = 10;
+    optional float dayLow = 11;
+    optional float change = 12;
+    optional string shortName = 13;
+    optional sint64 expireDate = 14;
+    optional float openPrice = 15;
+    optional float previousClose = 16;
+    optional float strikePrice = 17;
+    optional string underlyingSymbol = 18;
+    optional sint64 openInterest = 19;
+    optional sint64 optionType = 20;
+    optional sint64 miniOption = 21;
+    optional sint64 lastSize = 22;
+    optional float bid = 23;
+    optional sint64 bidSize = 24;
+    optional float ask = 25;
+    optional sint64 askSize = 26;
+    optional sint64 priceHint = 27;
+    optional sint64 vol_24hr = 28;
+    optional sint64 volAllCurrencies = 29;
+    optional string fromcurrency = 30;
+    optional string lastMarket = 31;
+    optional double circulatingSupply = 32;
+    optional double marketcap = 33;
+}
