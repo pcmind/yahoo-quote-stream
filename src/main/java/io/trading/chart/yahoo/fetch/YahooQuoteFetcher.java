@@ -28,7 +28,7 @@ public class YahooQuoteFetcher {
     private static final String FINANCE_CHART = "https://query1.finance.yahoo.com/v8/finance/chart/";
 
     public static void main(String[] args) throws IOException {
-        final YahooResult yahooResult = new YahooQuoteFetcher().fetch("CLVS", "1m", 2);
+        final YahooResult yahooResult = new YahooQuoteFetcher().fetch("CLVS", "1m", 2, true);
         System.out.println(yahooResult);
     }
 
@@ -36,9 +36,10 @@ public class YahooQuoteFetcher {
      * @param symbol
      * @param interval 1m, 5m, 15m, 30m, 1h, 4h, 1d, 1
      * @param daysBack
+     * @param includePrePost
      * @return
      */
-    public YahooResult fetch(String symbol, String interval, Integer daysBack) throws IOException {
+    public YahooResult fetch(String symbol, String interval, Integer daysBack, boolean includePrePost) throws IOException {
         final Date time = Calendar.getInstance().getTime();
         time.setTime(time.getTime() - TimeUnit.DAYS.toMillis(daysBack));
         return new Gson().fromJson(
@@ -47,14 +48,15 @@ public class YahooQuoteFetcher {
                     symbol,
                     time,
                     Calendar.getInstance().getTime(),
-                    interval
+                    interval,
+                    includePrePost
                 ),
                 "https://finance.yahoo.com/quote/" + symbol + "/chart?p=" + symbol),
             YahooResult.class
         );
     }
 
-    private String get(String symbol, java.util.Date from, java.util.Date to, String interval) {
+    private String get(String symbol, java.util.Date from, java.util.Date to, String interval, boolean includePrePost) {
         final QueryBuilder q = new QueryBuilder(FINANCE_CHART);
         q.prams.add(symbol);
         //CLVS?symbol=CLVS&period1=1575984950&period2=1576157750&interval=1m&includePrePost=true&events=div%7Csplit%7Cearn&lang=en-US&region=US&crumb=Exq9QZqOv2w&corsDomain=finance.yahoo.com
@@ -62,7 +64,7 @@ public class YahooQuoteFetcher {
         q.query("period1", String.valueOf(from.getTime() / 1000));
         q.query("period2", String.valueOf(to.getTime() / 1000));
         q.query("interval", interval);
-        q.query("includePrePost", "true");
+        q.query("includePrePost", String.valueOf(includePrePost));
         q.query("events", "div|split|earn|event");
         q.query("lang", "en-US");
         q.query("region", "US");
