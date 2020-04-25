@@ -1,6 +1,6 @@
 # yahoo quote stream
 
-Lib to access yahoo chart quote API and live quotes subscription.
+Unofficial lib to access yahoo chart quote API and live quotes subscription.
 
 #Dependencies
 This project dependends on protobuff to generate classes to parse live quotes.
@@ -8,12 +8,14 @@ This project dependends on protobuff to generate classes to parse live quotes.
 
 # How to
 
+Use [Jitpack](https://jitpack.io/) repo.
+ 
 Add maven dependency to your project:
 ```
 <dependency>
-    <groupId>io.github.pcmind.yahoo</groupId>
+    <groupId>com.github.pcmind</groupId>
     <artifactId>yahoo-quote-stream</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>master-SNAPSHOT</version>
 </dependency>
 ```
 
